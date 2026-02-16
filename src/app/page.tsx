@@ -1,65 +1,103 @@
-import Image from "next/image";
+"use client";
+
+import dynamic from "next/dynamic";
+import { AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import EditorialLoader from "@/components/sections/EditorialLoader";
+import HeroSection from "@/components/sections/HeroSection";
+import ArtGallery from "@/components/sections/ArtGallery";
+import Manifesto from "@/components/sections/Manifesto";
+import Footer from "@/components/sections/Footer";
+
+const Scene3D = dynamic(() => import("@/components/Scene3D"), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-primary/10 animate-pulse" />
+});
+
+const Timeline = dynamic(() => import("@/components/Timeline"), {
+  ssr: false,
+});
+
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Elegant minimum loading time to ensure smooth entrance
+    const timer = setTimeout(() => setIsLoading(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const timelineItems = [
+    {
+      year: "2024",
+      title: "The Dance",
+      description: "Koi fish dancing on water, symbolizing courage and transformation.",
+      image: "/images/koi.png"
+    },
+    {
+      year: "2024",
+      title: "Majestic",
+      description: "Silent wisdom embodied in the majestic elephant.",
+      image: "/images/elephant.png"
+    },
+    {
+      year: "2024",
+      title: "The Spirit",
+      description: "Raw energy and strength of the bull spirit.",
+      image: "/images/toro.png"
+    }
+  ];
+
+  const galleryArtworks = [
+    {
+      id: "danza",
+      title: "The Dance",
+      sub: "Danza sobre el Agua",
+      meta: "Masterpiece / No. 001",
+      description: "In dance on the water, they hold stories of courage, transformation, and hope. A digital revelation of the soul.",
+      image: "/images/koi.png",
+      accent: "oklch(0.7 0.12 10)",
+      medium: "Digital Art",
+      year: "2024"
+    },
+    {
+      id: "elefante",
+      title: "Majestic",
+      sub: "Silent Wisdom",
+      meta: "Wisdom Series / No. 002",
+      description: "The majestic elephant embodies rectitude, reason, and temperance. Silence is the highest form of power.",
+      image: "/images/elephant.png",
+      accent: "oklch(0.7 0.12 10)",
+      medium: "Digital Art",
+      year: "2024"
+    },
+    {
+      id: "toro",
+      title: "The Spirit",
+      sub: "Toro Bravo",
+      meta: "Raw Energy / No. 003",
+      description: "Strength, focus, and raw energy emerging from the heart of the earth. The bull never looks back.",
+      image: "/images/toro.png",
+      accent: "oklch(0.7 0.12 10)",
+      medium: "Digital Art",
+      year: "2024"
+    }
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="relative bg-primary overflow-hidden">
+      <AnimatePresence mode="wait">
+        {isLoading && <EditorialLoader />}
+      </AnimatePresence>
+
+      <Scene3D />
+
+      <HeroSection />
+      <ArtGallery artworks={galleryArtworks} />
+      <Timeline items={timelineItems} />
+      <Manifesto />
+      <Footer />
+    </main>
   );
 }

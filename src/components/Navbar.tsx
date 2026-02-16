@@ -35,22 +35,22 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className={`fixed top-0 inset-x-0 z-[100] transition-all duration-[1.2s] py-10 px-10 md:px-20 transform ${isVisible ? "translate-y-0" : "-translate-y-full"
+        <nav className={`fixed top-0 inset-x-0 z-[100] transition-all duration-[1.2s] py-6 px-6 md:py-10 md:px-20 transform ${isVisible ? "translate-y-0" : "-translate-y-full"
             }`}>
             <div className={`flex items-center justify-between transition-all duration-700 ${isScrolled ? "opacity-90 hover:opacity-100" : "opacity-100"
                 }`}>
                 {/* Editorial Logo */}
-                <div className="flex items-center gap-8 group cursor-pointer" role="banner" aria-label="Logo KRO.Art">
-                    <div className="w-14 h-14 rounded-full border border-white/10 p-0.5 overflow-hidden group-hover:rotate-[360deg] transition-transform duration-1000">
+                <div className="flex items-center gap-4 md:gap-8 group cursor-pointer" role="banner" aria-label="Logo KRO.Art">
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/10 p-0.5 overflow-hidden group-hover:rotate-[360deg] transition-transform duration-1000">
                         <Image src="/logo-kro.jpg" width={56} height={56} className="w-full h-full object-cover rounded-full" alt="Paula Lopez - KRO . ART" priority />
                     </div>
                     <div className="flex flex-col relative">
-                        <span className="font-serif font-black text-3xl tracking-[-0.05em] text-white">
+                        <span className="font-serif font-black text-xl md:text-3xl tracking-[-0.05em] text-white">
                             KRO.<span className="text-accent-emerald underline decoration-[0.5px] underline-offset-4">Art</span>
                         </span>
-                        <div className="flex items-center gap-3 mt-2">
-                            <span className="text-[9px] uppercase tracking-[1em] text-zinc-400 font-black">Paula Lopez Edition</span>
-                            <div className="flex items-center gap-1.5 ml-1">
+                        <div className="flex items-center gap-2 md:gap-3 mt-1 md:mt-2">
+                            <span className="text-[7px] md:text-[9px] uppercase tracking-[0.5em] md:tracking-[1em] text-zinc-400 font-black whitespace-nowrap">Paula Lopez Edition</span>
+                            <div className="hidden md:flex items-center gap-1.5 ml-1">
                                 <span className="relative flex h-1.5 w-1.5">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-emerald opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent-emerald"></span>
@@ -75,7 +75,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Minimalist Actions */}
-                <div className="flex items-center gap-12">
+                <div className="flex items-center gap-6 md:gap-12">
                     <a
                         href="https://www.instagram.com/kro_lopezart?igsh=MXMyZjBlcmwxNDN3bA%3D%3D"
                         target="_blank"
@@ -87,12 +87,12 @@ export default function Navbar() {
                         <span>IG / kro_lopezart</span>
                     </a>
                     <button className="relative p-2 group outline-none focus-visible:ring-2 focus-visible:ring-accent-emerald/50 rounded-full" aria-label="Bolsa de compras">
-                        <ShoppingBag size={36} className="text-zinc-200 group-hover:text-accent-emerald transition-colors" />
-                        <span className="absolute top-1 right-1 w-3 h-3 bg-accent-emerald rounded-full scale-0 group-hover:scale-100 transition-transform shadow-[0_0_15px_rgba(101,235,164,0.7)]" />
+                        <ShoppingBag className="w-6 h-6 md:w-9 md:h-9 text-zinc-200 group-hover:text-accent-emerald transition-colors" />
+                        <span className="absolute top-1 right-1 w-2 h-2 md:w-3 md:h-3 bg-accent-emerald rounded-full scale-0 group-hover:scale-100 transition-transform shadow-[0_0_15px_rgba(101,235,164,0.7)]" />
                     </button>
 
                     <button
-                        className="p-2 text-zinc-300 hover:text-white transition-colors lg:hidden outline-none focus-visible:ring-2 focus-visible:ring-white/20 rounded-lg"
+                        className="p-1 text-zinc-300 hover:text-white transition-colors lg:hidden outline-none focus-visible:ring-2 focus-visible:ring-white/20 rounded-lg"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
                         aria-expanded={isMobileMenuOpen}

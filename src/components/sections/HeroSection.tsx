@@ -34,30 +34,50 @@ export default function HeroSection() {
                     <span className="artence-cap text-[8px] md:text-[10px]">Elite Digital Magazine / 2025</span>
                     <h1 className="artence-title text-white flex flex-col overflow-hidden [text-wrap:balance]">
                         <div className="relative inline-block pb-2 md:pb-4">
-                            {"KRO . ART".split(" ").map((word, wi) => (
-                                <div key={wi} className="inline-block">
-                                    {word.split("").map((char, i) => (
-                                        <motion.span
-                                            key={i}
-                                            initial={{ y: "110%", opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            transition={{
-                                                duration: 1,
-                                                ease: [0.16, 1, 0.3, 1],
-                                                delay: (wi * 4 + i) * 0.05
-                                            }}
-                                            className="inline-block whitespace-pre text-5xl sm:text-7xl md:text-9xl"
-                                        >
-                                            {char === "." ? (
-                                                <span className="italic text-accent-emerald">{char}</span>
-                                            ) : (
-                                                char
-                                            )}
-                                        </motion.span>
-                                    ))}
-                                    {wi === 0 && <span className="inline-block text-5xl sm:text-7xl md:text-9xl">&nbsp;</span>}
-                                </div>
-                            ))}
+                            {typeof window !== 'undefined' && window.innerWidth < 768 ? (
+                                // Mobile: Animate words instead of characters for performance
+                                "KRO . ART".split(" ").map((word, wi) => (
+                                    <motion.span
+                                        key={wi}
+                                        initial={{ y: "50%", opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        transition={{
+                                            duration: 1,
+                                            ease: [0.16, 1, 0.3, 1],
+                                            delay: wi * 0.1
+                                        }}
+                                        className="inline-block whitespace-pre text-5xl sm:text-7xl mr-4"
+                                    >
+                                        {word === "." ? <span className="text-accent-emerald">{word}</span> : word}
+                                    </motion.span>
+                                ))
+                            ) : (
+                                // Desktop: High-quality character animation
+                                "KRO . ART".split(" ").map((word, wi) => (
+                                    <div key={wi} className="inline-block">
+                                        {word.split("").map((char, i) => (
+                                            <motion.span
+                                                key={i}
+                                                initial={{ y: "110%", opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{
+                                                    duration: 1,
+                                                    ease: [0.16, 1, 0.3, 1],
+                                                    delay: (wi * 4 + i) * 0.05
+                                                }}
+                                                className="inline-block whitespace-pre text-5xl sm:text-7xl md:text-9xl"
+                                            >
+                                                {char === "." ? (
+                                                    <span className="italic text-accent-emerald">{char}</span>
+                                                ) : (
+                                                    char
+                                                )}
+                                            </motion.span>
+                                        ))}
+                                        {wi === 0 && <span className="inline-block text-5xl sm:text-7xl md:text-9xl">&nbsp;</span>}
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </h1>
                     <div className="overflow-hidden">

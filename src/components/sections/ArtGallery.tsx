@@ -43,12 +43,13 @@ const ArtworkCard = memo(({ art, index, onImageClick }: ArtworkCardProps) => {
                         perspective={1000}
                         scale={1.02}
                         transitionSpeed={1500}
-                        gyroscope={true}
+                        gyroscope={false} // Disabled gyroscope on mobile for performance
+                        tiltEnable={typeof window !== 'undefined' && window.innerWidth > 768} // Disable tilt on mobile
                     >
                         <motion.div
                             initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                             viewport={{ once: true, margin: "-10%" }}
                             className="magazine-mask group cursor-crosshair relative noise-overlay"
                             whileTap={{ scale: 0.98 }}
@@ -60,7 +61,7 @@ const ArtworkCard = memo(({ art, index, onImageClick }: ArtworkCardProps) => {
                                 className="w-full aspect-[16/10] object-cover"
                                 loading="lazy"
                                 whileHover={{ scale: 1.01 }}
-                                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 0.4 }}
                             />
                             <div className="absolute inset-0 flex items-center justify-center lg:hidden opacity-0 active:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
                                 <span className="text-[10px] uppercase tracking-widest text-white font-black bg-black/60 px-3 py-1 rounded-full">
@@ -81,26 +82,39 @@ const ArtworkCard = memo(({ art, index, onImageClick }: ArtworkCardProps) => {
                 <div className="space-y-4">
                     <span className="artence-cap">{art.year} / {art.medium}</span>
                     <h2 className="artence-title !text-4xl lg:!text-[4.5rem] text-white tracking-tighter flex flex-wrap gap-x-4 [text-wrap:balance]">
-                        {art.title.split(" ").map((word, wordIdx) => (
-                            <span key={wordIdx} className={`inline-block ${wordIdx === art.title.split(" ").length - 1 ? "pr-6" : ""}`}>
-                                {word.split("").map((char, charIdx) => (
-                                    <motion.span
-                                        key={charIdx}
-                                        initial={{ y: "100%", opacity: 0 }}
-                                        whileInView={{ y: 0, opacity: 1 }}
-                                        transition={{
-                                            duration: 1,
-                                            ease: [0.16, 1, 0.3, 1],
-                                            delay: charIdx * 0.03 + wordIdx * 0.1
-                                        }}
-                                        viewport={{ once: true }}
-                                        className={`inline-block ${wordIdx === art.title.split(" ").length - 1 ? "italic text-accent-emerald" : ""}`}
-                                    >
-                                        {char}
-                                    </motion.span>
-                                ))}
-                            </span>
-                        ))}
+                        {typeof window !== 'undefined' && window.innerWidth < 768 ? (
+                            // Mobile: Simple word reveal
+                            <motion.span
+                                initial={{ y: 20, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                                viewport={{ once: true }}
+                            >
+                                {art.title}
+                            </motion.span>
+                        ) : (
+                            // Desktop: Character reveal
+                            art.title.split(" ").map((word, wordIdx) => (
+                                <span key={wordIdx} className={`inline-block ${wordIdx === art.title.split(" ").length - 1 ? "pr-6" : ""}`}>
+                                    {word.split("").map((char, charIdx) => (
+                                        <motion.span
+                                            key={charIdx}
+                                            initial={{ y: "100%", opacity: 0 }}
+                                            whileInView={{ y: 0, opacity: 1 }}
+                                            transition={{
+                                                duration: 1,
+                                                ease: [0.16, 1, 0.3, 1],
+                                                delay: charIdx * 0.03 + wordIdx * 0.1
+                                            }}
+                                            viewport={{ once: true }}
+                                            className={`inline-block ${wordIdx === art.title.split(" ").length - 1 ? "italic text-accent-emerald" : ""}`}
+                                        >
+                                            {char}
+                                        </motion.span>
+                                    ))}
+                                </span>
+                            ))
+                        )}
                     </h2>
                 </div>
 

@@ -87,16 +87,26 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+               if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                 document.documentElement.classList.add('is-touch');
+               }
+             `
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased text-zinc-100`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <FluidSimulation colorScheme="emerald" intensity={0.3} />
           <SmoothScroll>
-            <CustomCursor />
-            <CursorParticles />
+            <div className="hidden [.is-touch_&]:hidden md:block">
+              <CustomCursor />
+              <CursorParticles />
+            </div>
             <Navbar />
             {children}
-
           </SmoothScroll>
         </ThemeProvider>
       </body>

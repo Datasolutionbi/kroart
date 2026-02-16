@@ -76,10 +76,11 @@ export default function FluidSimulation({
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        // Set canvas size
+        // Optimized Resize: Use internal downsampling for performance
         const resize = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            const scale = window.innerWidth < 768 ? 0.5 : 0.75; // Lower resolution internally
+            canvas.width = window.innerWidth * scale;
+            canvas.height = window.innerHeight * scale;
         };
         resize();
         window.addEventListener("resize", resize);
@@ -93,10 +94,13 @@ export default function FluidSimulation({
 
         const selectedColors = colors[colorScheme];
 
-        // Create particles
+        // Create particles: adaptive count based on screen area
         const particles: Particle[] = [];
-        const particleCount = Math.floor((canvas.width * canvas.height) / 50000);
-        for (let i = 0; i < particleCount; i++) {
+        const isMobile = window.innerWidth < 768;
+        const baseDensity = isMobile ? 80000 : 50000;
+        const particleCount = Math.floor((canvas.width * canvas.height) / baseDensity);
+
+        for (let i = 0; i < Math.min(particleCount, isMobile ? 8 : 20); i++) {
             particles.push(new Particle(canvas.width, canvas.height, intensity, selectedColors));
         }
 
@@ -122,7 +126,9 @@ export default function FluidSimulation({
         };
     }, [intensity, colorScheme, prefersReducedMotion]);
 
-    if (prefersReducedMotion) {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
+    if (prefersReducedMotion || isMobile) {
         return null;
     }
 
@@ -130,7 +136,11 @@ export default function FluidSimulation({
         <canvas
             ref={canvasRef}
             className={`fixed inset-0 pointer-events-none opacity-30 ${className}`}
-            style={{ filter: "blur(40px)" }}
+            style={{
+                filter: "blur(20px)", // Reduced from 40px for huge performance gain
+                width: "100vw",
+                height: "100vh"
+            }}
         />
     );
 }

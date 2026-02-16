@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 interface FluidSimulationProps {
     className?: string;
     intensity?: number;
-    colorScheme?: "emerald" | "purple" | "blue";
+    colorScheme?: "emerald" | "purple" | "blue" | "neutral";
 }
 
 // Particle class outside component

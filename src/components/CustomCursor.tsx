@@ -7,8 +7,8 @@ export default function CustomCursor() {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    const springConfig = { damping: 25, stiffness: 200 };
-    const glowConfig = { damping: 60, stiffness: 80 }; // Even softer, slower lag for atmospheric feel
+    const springConfig = { damping: 40, stiffness: 450, mass: 0.5 }; // High frequency, fast response
+    const glowConfig = { damping: 50, stiffness: 30, mass: 1 }; // Soft cinematic lag
     const cursorX = useSpring(mouseX, springConfig);
     const cursorY = useSpring(mouseY, springConfig);
     const glowX = useSpring(mouseX, glowConfig);
@@ -18,22 +18,30 @@ export default function CustomCursor() {
     const [cursorText, setCursorText] = useState("");
 
     useEffect(() => {
+        let lastHoverCheck = 0;
+
         const handleMouseMove = (e: MouseEvent) => {
+            // Immediate position update
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
 
-            const target = e.target as HTMLElement;
-            const isInteractive = target.closest("button, a, .group");
-            setIsHovering(!!isInteractive);
+            // Throttled interactive check (Performance optimization)
+            const now = Date.now();
+            if (now - lastHoverCheck > 100) {
+                const target = e.target as HTMLElement;
+                const isInteractive = target.closest("button, a, .group, [role='button']");
+                setIsHovering(!!isInteractive);
 
-            if (target.closest(".magazine-mask")) {
-                setCursorText("VIEW");
-            } else {
-                setCursorText("");
+                if (target.closest(".magazine-mask")) {
+                    setCursorText("VIEW");
+                } else {
+                    setCursorText("");
+                }
+                lastHoverCheck = now;
             }
         };
 
-        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 

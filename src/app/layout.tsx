@@ -99,7 +99,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased text-zinc-100`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <FluidSimulation colorScheme="emerald" intensity={0.3} />
+          <FluidSimulation colorScheme="neutral" intensity={0.25} />
           <SmoothScroll>
             <div className="hidden [.is-touch_&]:hidden md:block">
               <CustomCursor />

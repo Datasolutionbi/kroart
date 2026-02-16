@@ -83,8 +83,13 @@ export default function ArtFilters({ onFilterChange, availableMediums, available
                                 {availableMediums.map((medium) => (
                                     <button
                                         key={medium}
-                                        onClick={() => handleMediumChange(medium)}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedMedium === medium
+                                        onClick={() => {
+                                            handleMediumChange(medium);
+                                            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                                                navigator.vibrate(5);
+                                            }
+                                        }}
+                                        className={`px-4 py-3 rounded-lg text-sm font-medium transition-all min-h-[44px] flex items-center ${selectedMedium === medium
                                             ? "bg-accent-emerald text-black"
                                             : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                                             }`}
@@ -104,8 +109,13 @@ export default function ArtFilters({ onFilterChange, availableMediums, available
                                 {availableYears.map((year) => (
                                     <button
                                         key={year}
-                                        onClick={() => handleYearChange(year)}
-                                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedYear === year
+                                        onClick={() => {
+                                            handleYearChange(year);
+                                            if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                                                navigator.vibrate(5);
+                                            }
+                                        }}
+                                        className={`px-4 py-3 rounded-lg text-sm font-medium transition-all min-h-[44px] flex items-center ${selectedYear === year
                                             ? "bg-accent-emerald text-black"
                                             : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                                             }`}

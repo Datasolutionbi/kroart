@@ -41,12 +41,12 @@ export default function HeroSection() {
                                         {word.split("").map((char, i) => (
                                             <motion.span
                                                 key={i}
-                                                initial={{ y: "20%", opacity: 0 }}
+                                                initial={{ y: "100%", opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
                                                 transition={{
-                                                    duration: 0.5,
-                                                    ease: "easeOut",
-                                                    delay: (wi * 4 + i) * 0.03
+                                                    duration: 1,
+                                                    ease: [0.16, 1, 0.3, 1],
+                                                    delay: (wi * 4 + i) * 0.04
                                                 }}
                                                 className="inline-block whitespace-pre text-5xl sm:text-7xl"
                                             >

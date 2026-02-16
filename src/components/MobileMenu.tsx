@@ -26,7 +26,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
                         }
                     }}
                     transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                    className="fixed inset-0 z-[150] bg-primary/95 backdrop-blur-[50px] flex flex-col items-center justify-center p-20 lg:hidden touch-none"
+                    className="fixed inset-0 z-[150] bg-primary flex flex-col items-center justify-center p-20 lg:hidden touch-none"
                 >
                     <div className="absolute top-8 left-8 text-white/20 text-[8px] font-mono uppercase tracking-[0.4em] animate-pulse lg:hidden">
                         &larr; Drag to close

@@ -40,20 +40,20 @@ export default function Scene3D() {
                 dpr={isMobile ? [1, 1] : [1, 2]} // Force 1.0 DPR on mobile
             >
                 <ambientLight intensity={0.2} />
-                <pointLight position={[10, 10, 10]} intensity={1.5} color="#65eba4" />
-                <pointLight position={[-10, -10, -10]} intensity={1} color="#d4a1a6" />
+                <pointLight position={[10, 10, 10]} intensity={1.5} color="#ffffff" />
+                <pointLight position={[-10, -10, -10]} intensity={1} color="#a1a1aa" />
 
                 <Float speed={2} rotationIntensity={1} floatIntensity={1.5}>
                     <Sphere args={[1.2, isMobile ? 32 : 128, isMobile ? 32 : 128]} scale={2.5}>
                         <MeshDistortMaterial
-                            color="#10b981"
+                            color="#a1a1aa"
                             speed={2.5}
                             distort={0.3}
                             radius={1}
                             roughness={0.1}
                             metalness={0.8}
-                            emissive="#10b981"
-                            emissiveIntensity={0.2}
+                            emissive="#ffffff"
+                            emissiveIntensity={0.1}
                         />
                     </Sphere>
                 </Float>

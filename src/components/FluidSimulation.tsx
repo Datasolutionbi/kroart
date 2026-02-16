@@ -90,17 +90,18 @@ export default function FluidSimulation({
             emerald: ["rgba(16, 185, 129, ", "rgba(5, 150, 105, ", "rgba(4, 120, 87, "],
             purple: ["rgba(168, 85, 247, ", "rgba(147, 51, 234, ", "rgba(126, 34, 206, "],
             blue: ["rgba(59, 130, 246, ", "rgba(37, 99, 235, ", "rgba(29, 78, 216, "],
+            neutral: ["rgba(161, 161, 170, ", "rgba(113, 113, 122, ", "rgba(82, 82, 91, "] // Zinc/Neutral for mobile luxury
         };
 
-        const selectedColors = colors[colorScheme];
+        const selectedColors = colors[colorScheme] || colors.neutral;
 
         // Create particles: adaptive count based on screen area
         const particles: Particle[] = [];
         const isMobile = window.innerWidth < 768;
-        const baseDensity = isMobile ? 80000 : 50000;
+        const baseDensity = isMobile ? 60000 : 50000; // Increased density from 80k to 60k for better flow
         const particleCount = Math.floor((canvas.width * canvas.height) / baseDensity);
 
-        for (let i = 0; i < Math.min(particleCount, isMobile ? 5 : 20); i++) {
+        for (let i = 0; i < Math.min(particleCount, isMobile ? 12 : 20); i++) {
             particles.push(new Particle(canvas.width, canvas.height, intensity, selectedColors));
         }
 

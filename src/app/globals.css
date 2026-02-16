@@ -128,26 +128,49 @@
   .framer-glass {
     @apply rounded-2xl border border-white/10;
     background-color: oklch(0.04 0.01 10 / 0.4);
-    -webkit-backdrop-filter: blur(100px);
-    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    /* Reduced from 100px for performance */
     box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 1);
+  }
+
+  @media (min-width: 1024px) {
+    .framer-glass {
+      -webkit-backdrop-filter: blur(100px);
+      backdrop-filter: blur(100px);
+    }
   }
 
   /* Layout Spacing */
   .content-spread {
-    @apply relative z-10 mx-auto px-10 md:px-24;
+    @apply relative z-10 mx-auto px-6 md:px-24;
     max-width: 1700px;
   }
 
   .magazine-mask {
     @apply relative overflow-hidden border border-white/5;
-    border-radius: 3rem;
+    border-radius: 1rem;
+    /* Reduced for mobile to prevent over-rounding */
     box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 1);
+  }
+
+  @media (min-width: 768px) {
+    .magazine-mask {
+      border-radius: 3rem;
+    }
   }
 
   .mask-reveal {
     -webkit-mask-image: linear-gradient(to top, black 80%, transparent);
     mask-image: linear-gradient(to top, black 80%, transparent);
+  }
+}
+
+/* Optimization for Noise Blend Mode in Mobile */
+@media (max-width: 768px) {
+  body::before {
+    mix-blend-mode: normal !important;
+    opacity: 0.05 !important;
   }
 }
 

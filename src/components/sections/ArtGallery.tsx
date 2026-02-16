@@ -63,7 +63,7 @@ const ArtworkCard = memo(({ art, index, onImageClick }: ArtworkCardProps) => {
                                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                             />
                             <div className="absolute inset-0 flex items-center justify-center lg:hidden opacity-0 active:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
-                                <span className="text-[10px] uppercase tracking-widest text-white font-black bg-black/50 px-3 py-1 backdrop-blur-sm rounded-full">
+                                <span className="text-[10px] uppercase tracking-widest text-white font-black bg-black/60 px-3 py-1 rounded-full">
                                     Tap to View
                                 </span>
                             </div>

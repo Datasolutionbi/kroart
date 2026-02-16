@@ -34,24 +34,29 @@ export default function HeroSection() {
                     <span className="artence-cap text-[8px] md:text-[10px]">Elite Digital Magazine / 2025</span>
                     <h1 className="artence-title text-white flex flex-col overflow-hidden [text-wrap:balance]">
                         <div className="relative inline-block pb-2 md:pb-4">
-                            {"KRO . ART".split("").map((char, i) => (
-                                <motion.span
-                                    key={i}
-                                    initial={{ y: "110%", skewY: 10, filter: "blur(20px)", opacity: 0 }}
-                                    animate={{ y: 0, skewY: 0, filter: "blur(0px)", opacity: 1 }}
-                                    transition={{
-                                        duration: 1.5,
-                                        ease: [0.16, 1, 0.3, 1],
-                                        delay: i * 0.05
-                                    }}
-                                    className="inline-block whitespace-pre text-5xl sm:text-7xl md:text-9xl"
-                                >
-                                    {char === "." ? (
-                                        <span className="italic text-accent-emerald">{char}</span>
-                                    ) : (
-                                        char
-                                    )}
-                                </motion.span>
+                            {"KRO . ART".split(" ").map((word, wi) => (
+                                <div key={wi} className="inline-block">
+                                    {word.split("").map((char, i) => (
+                                        <motion.span
+                                            key={i}
+                                            initial={{ y: "110%", opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{
+                                                duration: 1,
+                                                ease: [0.16, 1, 0.3, 1],
+                                                delay: (wi * 4 + i) * 0.05
+                                            }}
+                                            className="inline-block whitespace-pre text-5xl sm:text-7xl md:text-9xl"
+                                        >
+                                            {char === "." ? (
+                                                <span className="italic text-accent-emerald">{char}</span>
+                                            ) : (
+                                                char
+                                            )}
+                                        </motion.span>
+                                    ))}
+                                    {wi === 0 && <span className="inline-block text-5xl sm:text-7xl md:text-9xl">&nbsp;</span>}
+                                </div>
                             ))}
                         </div>
                     </h1>

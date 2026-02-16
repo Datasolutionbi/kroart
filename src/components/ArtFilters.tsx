@@ -40,7 +40,7 @@ export default function ArtFilters({ onFilterChange, availableMediums, available
             {/* Filter Toggle Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed top-32 right-10 z-40 p-4 bg-black/30 hover:bg-black/50 backdrop-blur-md rounded-full border border-white/10 transition-all duration-300 group"
+                className="fixed top-32 right-10 z-40 p-4 bg-black/50 lg:backdrop-blur-md rounded-full border border-white/10 transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Filtros de galería"
@@ -85,8 +85,8 @@ export default function ArtFilters({ onFilterChange, availableMediums, available
                                         key={medium}
                                         onClick={() => handleMediumChange(medium)}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedMedium === medium
-                                                ? "bg-accent-emerald text-black"
-                                                : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                                            ? "bg-accent-emerald text-black"
+                                            : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                                             }`}
                                     >
                                         {medium}
@@ -106,8 +106,8 @@ export default function ArtFilters({ onFilterChange, availableMediums, available
                                         key={year}
                                         onClick={() => handleYearChange(year)}
                                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedYear === year
-                                                ? "bg-accent-emerald text-black"
-                                                : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                                            ? "bg-accent-emerald text-black"
+                                            : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
                                             }`}
                                     >
                                         {year}

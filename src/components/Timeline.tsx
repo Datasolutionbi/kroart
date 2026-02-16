@@ -60,7 +60,7 @@ export default function Timeline({ items }: TimelineProps) {
                         </div>
 
                         {/* Image */}
-                        <div className="relative w-full h-[250px] md:h-[300px] mb-6 overflow-hidden rounded-2xl">
+                        <div className="relative w-full h-[250px] md:h-[300px] mb-6 overflow-hidden rounded-xl md:rounded-2xl">
                             <Image
                                 src={item.image}
                                 alt={item.title}

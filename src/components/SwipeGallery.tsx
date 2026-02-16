@@ -54,7 +54,7 @@ export default function SwipeGallery({ artworks, initialIndex = 0, onClose }: Sw
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-xl flex flex-col"
+            className="fixed inset-0 z-[200] bg-black/95 lg:backdrop-blur-xl flex flex-col"
         >
             {/* Header */}
             <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between p-6">

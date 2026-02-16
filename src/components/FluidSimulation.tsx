@@ -100,7 +100,7 @@ export default function FluidSimulation({
         const baseDensity = isMobile ? 80000 : 50000;
         const particleCount = Math.floor((canvas.width * canvas.height) / baseDensity);
 
-        for (let i = 0; i < Math.min(particleCount, isMobile ? 8 : 20); i++) {
+        for (let i = 0; i < Math.min(particleCount, isMobile ? 5 : 20); i++) {
             particles.push(new Particle(canvas.width, canvas.height, intensity, selectedColors));
         }
 
@@ -128,7 +128,7 @@ export default function FluidSimulation({
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
 
-    if (prefersReducedMotion || isMobile) {
+    if (prefersReducedMotion) {
         return null;
     }
 

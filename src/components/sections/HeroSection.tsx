@@ -37,19 +37,28 @@ export default function HeroSection() {
                             {typeof window !== 'undefined' && window.innerWidth < 768 ? (
                                 // Mobile: Animate words instead of characters for performance
                                 "KRO . ART".split(" ").map((word, wi) => (
-                                    <motion.span
-                                        key={wi}
-                                        initial={{ y: "50%", opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        transition={{
-                                            duration: 1,
-                                            ease: [0.16, 1, 0.3, 1],
-                                            delay: wi * 0.1
-                                        }}
-                                        className="inline-block whitespace-pre text-5xl sm:text-7xl mr-4"
-                                    >
-                                        {word === "." ? <span className="text-accent-emerald">{word}</span> : word}
-                                    </motion.span>
+                                    <div key={wi} className="inline-block">
+                                        {word.split("").map((char, i) => (
+                                            <motion.span
+                                                key={i}
+                                                initial={{ y: "20%", opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                transition={{
+                                                    duration: 0.5,
+                                                    ease: "easeOut",
+                                                    delay: (wi * 4 + i) * 0.03
+                                                }}
+                                                className="inline-block whitespace-pre text-5xl sm:text-7xl"
+                                            >
+                                                {char === "." ? (
+                                                    <span className="text-accent-emerald">{char}</span>
+                                                ) : (
+                                                    char
+                                                )}
+                                            </motion.span>
+                                        ))}
+                                        {wi === 0 && <span className="inline-block text-5xl sm:text-7xl">&nbsp;</span>}
+                                    </div>
                                 ))
                             ) : (
                                 // Desktop: High-quality character animation

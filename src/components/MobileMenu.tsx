@@ -28,27 +28,27 @@ export default function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProp
                     transition={{ type: "spring", damping: 30, stiffness: 200 }}
                     className="fixed inset-0 z-[150] bg-primary/95 backdrop-blur-[50px] flex flex-col items-center justify-center p-20 lg:hidden touch-none"
                 >
-                    <div className="absolute top-10 left-10 text-white/30 text-xs font-mono uppercase tracking-widest animate-pulse lg:hidden">
+                    <div className="absolute top-8 left-8 text-white/20 text-[8px] font-mono uppercase tracking-[0.4em] animate-pulse lg:hidden">
                         &larr; Drag to close
                     </div>
                     <button
-                        className="absolute top-10 right-10 p-4 text-zinc-400 hover:text-white transition-colors"
+                        className="absolute top-8 right-8 p-3 text-zinc-500 hover:text-white transition-colors"
                         onClick={onClose}
                         aria-label="Cerrar menú"
                     >
-                        <X size={40} strokeWidth={1} />
+                        <X size={32} strokeWidth={1} />
                     </button>
 
-                    <div className="flex flex-col gap-12 text-center w-full">
+                    <div className="flex flex-col gap-10 text-center w-full">
                         {navLinks.map((link, i) => (
                             <motion.a
                                 key={link.name}
                                 href={link.href}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 15 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 + 0.3 }}
+                                transition={{ delay: i * 0.1 + 0.2 }}
                                 onClick={onClose}
-                                className="artence-title !text-6xl md:!text-8xl hover:text-accent-emerald transition-colors"
+                                className="artence-title !text-4xl md:!text-6xl hover:text-accent-emerald transition-colors tracking-tighter"
                             >
                                 {link.name}
                             </motion.a>
